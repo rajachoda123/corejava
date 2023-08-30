@@ -4,7 +4,7 @@ import java.util.Stack;
 
 public class BalancedBrackets {
     public static void main(String[] args) {
-      String expression = "([{}])";
+      String expression = "([{}]){}";
       if(checkIfBalancedBracket(expression)) {
           System.out.println("Balanced");
       }
@@ -14,14 +14,20 @@ public class BalancedBrackets {
     private static boolean checkIfBalancedBracket(String expression) {
         Stack<Character> stack = new Stack<>();
         char[] charArray = expression.toCharArray();
-        for ( int i =0; i < charArray.length ; i++) {
-            if(isOpenBracket(charArray[i])) {
-                stack.push(charArray[i]);
-            } else if(  stack.isEmpty() || isClosedBracket(charArray[i])) {
-                stack.pop();
+        for (char ch : charArray) {
+            if(isOpenBracket(ch)) {
+                stack.push(ch);
+            } else if(isClosedBracket(ch))
+             if(  stack.isEmpty() || !bracketsMatch(stack.pop(),ch)) {
+                return  false;
             }
         }
-        return false;
+        //if the stack is empty all brackets are balanced
+        return stack.isEmpty();
+    }
+
+    private static boolean bracketsMatch(char open, char close) {
+        return (open=='(' && close==')' || open == '[' && close == ']' || open == '{' && close == '}');
     }
 
     private static boolean isOpenBracket(char ch) {
