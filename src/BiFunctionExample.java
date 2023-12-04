@@ -11,4 +11,5 @@ public class BiFunctionExample implements BiFunction<List<Integer>, List<Integer
                 .distinct()
                 .collect(Collectors.toList());
     }
+
 }

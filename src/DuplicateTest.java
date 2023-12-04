@@ -1,4 +1,5 @@
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class DuplicateTest {
     public static void main(String[] args) {
@@ -21,5 +22,10 @@ public class DuplicateTest {
             }
         }
         System.out.println(set);
+
+        List<Integer> list = Arrays.asList(1, 10, 20, 41, 50, 91);
+        Integer result = list.stream().sorted().skip(2).limit(1).findAny().get();
+        System.out.println(result);
+
     }
 }
